@@ -122,18 +122,18 @@ class Minifier
 		
 		$output = preg_replace_callback($pattern, function ($match) use (&$i, &$replaces) {
 			if (isset($match[3])) {
-				// ...
+				// replace single line comment (two slashes)
 				return "\n";
 			
 			} elseif (isset($match[2])) {
-				// regex
+				// replace regex
 				$k = '"'. (++$i) .'"';
 				$replaces[$k] = $match[2];
 				
 				return $k;
 			
 			} elseif (isset($match[1])) {
-				// quotes
+				// replace string
 				if ($match[0] == $match[1] . $match[1]) {
 					return $match[0];
 				}
@@ -143,7 +143,7 @@ class Minifier
 				return $k;
 			
 			} else {
-				/* ... */
+				// replace multi-line comment
 				return ' ';
 			}
         }, $output);
