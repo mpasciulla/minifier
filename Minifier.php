@@ -45,10 +45,7 @@ class Minifier
 				}
 				
 				// check extensions
-				if (!$_type) {
-					$_type = $type;
-				
-				} elseif ($type != $_type) {
+				if ($type != $_type) {
 					throw new Exception('The minifier has failed.');
 				}
 				
